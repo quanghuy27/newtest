@@ -7,7 +7,7 @@ app.listen(2000);
 
 //mongo
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://admin:admin@cluster0.hf1ea.mongodb.net/Marvels?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true}, function(err){
+mongoose.connect('mongodb+srv://test:yiLyDfOjxx43T5iq@cluster0.hf1ea.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true}, function(err){
   if(err){
     console.log("Mongo connect error: " + err);
   }else{
@@ -70,10 +70,23 @@ app.post("/add", function (req, res){
                res.json({"kq": 0 , "errMsg":err});
              }
              else{
-               res.json({"kq":1 });
+               res.redirect("./list");
              }
            })
         }
 
     });
 });
+
+//Danh sách
+
+app.get("/list", function (req, res){
+  Marvel.find(function(err, data)
+  {
+    if(err){
+      res.json({"kq ": 0,"errMsg" : err});
+    }else{
+      res.render("list",{danhsach:data});
+    }
+  })
+})
