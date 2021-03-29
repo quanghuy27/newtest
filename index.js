@@ -89,4 +89,34 @@ app.get("/list", function (req, res){
       res.render("list",{danhsach:data});
     }
   })
+});
+
+
+//Edit
+app.get("/edit/:id", function (req, res){
+
+  Marvel.findById(req.params.id,function (err,data){
+    if(err){
+      res.json({"kq ": 0,"errMsg" : err});
+    }else{
+      console.log(data);
+      res.render("edit", {nhanvat:data});
+    }
+  });
+    
+});
+
+app.post("/edit", function (req, res){
+  
+  //Xu ly upload file ( check khach hang co chon file moi khong)
+  if(req.files){
+    res.send("Cos")
+  }
+  else
+  res.send("deo")
+  
+  
+  //1. Khong co file moi 
+  //2. Co file moi
+  
 })
